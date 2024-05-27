@@ -26,7 +26,7 @@ class ApiHH:
             return response.json()['items']
 
         except requests.exceptions.HTTPError as error:
-            raise ConnectionError(f"Failed to access the site: {error}")
+            raise ConnectionError(f"Не удалось получить доступ к сайту: {error}")
 
     def get_employers(self):
         employer_list = []

@@ -9,7 +9,7 @@ class DatabaseManager:
 
     def create_database(self):
         if not re.match(r'^[a-zA-Z0-9_]+$', self.db_name):
-            raise ValueError("Database name should only contain letters, numbers, and underscores.")
+            raise ValueError("Имя базы данных должно содержать только буквы, цифры и символы подчеркивания.")
         else:
             conn = psycopg2.connect(dbname='postgres', **self.params)
             conn.autocommit = True
@@ -21,13 +21,13 @@ class DatabaseManager:
                 conn.close()
 
             except (psycopg2.DatabaseError, psycopg2.OperationalError, psycopg2.errors.InvalidCatalogName) as e:
-                print(f"Error creating database: {e}")
+                print(f"Ошибка создания базы данных: {e}")
 
     def create_db_tables(self):
         try:
             with psycopg2.connect(dbname=self.db_name, **self.params) as conn:
                 with conn.cursor() as cur:
-                    cur.execute("SELECT true FROM pg_catalog.pg_database WHERE datname = %s", (self.db_name,))
+                    cur.execute("SELECT true FROM pg_catalog.pg_database WHERE dataname = %s", (self.db_name,))
                     if not cur.fetchone():
                         raise Exception(f"Database {self.db_name} not found.")
 
@@ -57,7 +57,7 @@ class DatabaseManager:
             conn.close()
 
         except psycopg2.Error as e:
-            print(f"Error creating tables: {e}")
+            print(f"Ошибка создания таблиц: {e}")
 
     def save_data_to_db(self, employers_data, jobs_data):
         try:
@@ -87,7 +87,7 @@ class DatabaseManager:
                         )
                     conn.commit()
         except psycopg2.Error as e:
-            print(f"Error filling tables: {e}")
+            print(f"Ошибка заполнения таблиц: {e}")
             conn.rollback()
         finally:
             if conn is not None:
@@ -103,7 +103,7 @@ class DatabaseManager:
             return result
 
         except psycopg2.Error as e:
-            print(f"Error getting a list of all employers and the number of jobs at each company: {e}")
+            print(f"Ошибка получения списка всех работодателей и количества рабочих мест в каждой компании: {e}")
 
     def get_all_jobs(self):
         try:
@@ -115,7 +115,7 @@ class DatabaseManager:
             return result
 
         except psycopg2.Error as e:
-            print(f"Error getting a list of all jobs: {e}")
+            print(f"Ошибка получения списка всех вакансий.: {e}")
 
     def get_avg_salary(self):
         try:
@@ -127,7 +127,7 @@ class DatabaseManager:
             return result
 
         except psycopg2.Error as e:
-            print(f"Error getting the average salary for jobs: {e}")
+            print(f"Ошибка получения средней зарплаты по должностям: {e}")
 
     def get_jobs_with_higher_salary(self):
         try:
@@ -141,7 +141,7 @@ class DatabaseManager:
             return result
 
         except psycopg2.Error as e:
-            print(f"Error getting a list of all jobs with a salary higher than the average salary: {e}")
+            print(f"Ошибка получения списка всех вакансий с зарплатой выше средней.: {e}")
 
     def get_jobs_with_keyword(self, keyword):
         try:
@@ -151,9 +151,9 @@ class DatabaseManager:
                                 f"WHERE job_title LIKE '%{keyword.capitalize()}%'")
                     result = cur.fetchall()
                     if len(result) == 0:
-                        return ["No jobs found"]
+                        return ["Вакансий не найдено"]
             conn.close()
             return result
 
         except psycopg2.Error as e:
-            print(f"Error getting a list of all jobs by keyword: {e}")
+            print(f"Ошибка получения списка всех вакансий по ключевому слову.: {e}")

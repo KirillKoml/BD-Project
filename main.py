@@ -21,30 +21,30 @@ def main():
 
     all_employers_jobs = db_manager.get_employers_and_jobs_count()
 
-    print("Getting a list of all employers and the number of jobs at each company: ")
+    print("Получение списка всех работодателей и количества рабочих мест в каждой компании: ")
     for value in all_employers_jobs:
         print(f"{value}")
 
     all_jobs = db_manager.get_all_jobs()
 
-    print("\nGetting a list of all jobs: ")
+    print("\nПолучение списка всех вакансий: ")
     for value in all_jobs:
         print(f"{value}\n")
 
     avg_salary = db_manager.get_avg_salary()
 
-    print("\nGetting the average salary for jobs: ")
+    print("\nПолучение средней зарплаты по должностям: ")
     for value in avg_salary:
         print(f"{value}\n")
 
     higher_salary_jobs = db_manager.get_jobs_with_higher_salary()
 
-    print("\nGetting a list of all jobs with a salary higher than the average salary: ")
+    print("\nПолучение списка всех вакансий с зарплатой выше средней: ")
     for value in higher_salary_jobs:
         print(f"{value}")
 
     keyword_jobs = db_manager.get_jobs_with_keyword('driver')
-    print("\nGetting a list of all jobs by keyword: ")
+    print("\nПолучение списка всех вакансий по ключевому слову: ")
     for value in keyword_jobs:
         print(f"{value}")
 # This is a sample Python script.
