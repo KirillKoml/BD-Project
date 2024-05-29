@@ -10,7 +10,7 @@ source venv/Scripts/activate
 Пример файла:
 
 
-[postgresql]
+[postgresql] 
 host=localhost
 user=postgres
 password=123456789
