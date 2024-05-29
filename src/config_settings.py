@@ -13,5 +13,5 @@ def read_config(filename='database.ini', section='postgresql'):
         for param in params:
             db_params[param[0]] = param[1]
     else:
-        raise Exception(f'Section {section} is not found in the {filename} file.')
+        raise Exception(f'Раздел {section} не найден в файле {filename}.')
     return db_params
