@@ -27,7 +27,7 @@ class DatabaseManager:
         try:
             with psycopg2.connect(dbname=self.db_name, **self.params) as conn:
                 with conn.cursor() as cur:
-                    cur.execute("SELECT true FROM pg_catalog.pg_database WHERE dataname = %s", (self.db_name,))
+                    cur.execute("SELECT true FROM pg_catalog.pg_database WHERE datname = %s", (self.db_name,))
                     if not cur.fetchone():
                         raise Exception(f"Database {self.db_name} not found.")
 
